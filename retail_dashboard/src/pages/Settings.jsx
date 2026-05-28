@@ -959,43 +959,68 @@ export default function Settings({ mode = 'all' }) {
   //     addToast('Failed to update camera', 'error');
   //   }
   // }, [addToast]);
-  const handleToggle = useCallback(async (cam, field, value) => {
-    // optimistic update
-    setCameras(prev =>
-      prev.map(c =>
-        c.id === cam.id ? { ...c, [field]: value } : c
-      )
-    );
-
-    try {
-      const res = await fetch(`${API}/cameras/${cam.id}/toggle`, {
-        method: 'PUT',
-        headers: authHeaders(),
-        body: JSON.stringify({ field, value }),
-      });
-
-      const result = await res.json();
-
-      if (!res.ok || !result.success) {
-        throw new Error(result.message || 'Toggle failed');
-      }
-
-      // IMPORTANT
-      // reload actual DB values
-      await loadCameras(activeStore);
-
-    } catch (e) {
+  const handleToggle = useCallback(
+    async (cam, field, value) => {
+      // Optimistic UI update
       setCameras(prev =>
         prev.map(c =>
-          c.id === cam.id ? { ...c, [field]: !value } : c
+          c.id === cam.id
+            ? { ...c, [field]: value }
+            : c
         )
       );
 
-      addToast('Failed to update camera', 'error');
-      console.error(e);
-    }
-  }, [addToast, activeStore, loadCameras]);
-  const saveCamera = useCallback(async formData => {
+      try {
+        const res = await fetch(
+          `${API}/cameras/${cam.id}?store=${encodeURIComponent(
+            activeStore
+          )}`,
+          {
+            method: 'PUT',
+            headers: authHeaders(),
+            body: JSON.stringify({
+              ...cam,
+              [field]: value,
+              store_name: activeStore,
+            }),
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error('Failed to update');
+        }
+
+        const updated = await res.json().catch(() => null);
+
+        // Optional backend refresh sync
+        if (updated?.camera) {
+          setCameras(prev =>
+            prev.map(c =>
+              c.id === cam.id
+                ? {
+                    ...c,
+                    ...updated.camera,
+                  }
+                : c
+            )
+          );
+        }
+      } catch (e) {
+        // Rollback UI if failed
+        setCameras(prev =>
+          prev.map(c =>
+            c.id === cam.id
+              ? { ...c, [field]: !value }
+              : c
+          )
+        );
+
+        addToast('Failed to update camera', 'error');
+      }
+    },
+    [activeStore, addToast]
+  );
+    const saveCamera = useCallback(async formData => {
     setModalSaving(true);
     try {
       if (editCam) {
