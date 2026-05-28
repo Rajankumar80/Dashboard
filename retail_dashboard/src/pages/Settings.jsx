@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   Camera, Plus, Trash2, Edit3, CheckCircle2, XCircle,
@@ -931,20 +930,71 @@ export default function Settings({ mode = 'all' }) {
       loadCameras(activeStore);
     }
   }, [activeStore]);
+  // const handleToggle = useCallback(async (cam, field, value) => {
+  //   setCameras(prev => prev.map(c => c.id === cam.id ? { ...c, [field]: value } : c));
+  //   try {
+  //     const res = await fetch(`${API}/cameras/${cam.id}?store=${encodeURIComponent(activeStore)}`, {
+  //       method: 'PUT',
+  //       headers: authHeaders(),
+  //       body: JSON.stringify({ ...cam, [field]: value, store_name: activeStore }),
+  //     });
+  //     if (!res.ok) throw new Error();
+  //   } catch {
+  //     setCameras(prev => prev.map(c => c.id === cam.id ? { ...c, [field]: !value } : c));
+  //     addToast('Failed to update camera', 'error');
+  //   }
+  // }, [addToast, activeStore]);
+  // const handleToggle = useCallback(async (cam, field, value) => {
+  //   setCameras(prev => prev.map(c => c.id === cam.id ? { ...c, [field]: value } : c));
+  //   try {
+  //     const res = await fetch(`${API}/cameras/${cam.id}/toggle`, {
+  //       method: 'PUT',
+  //       headers: authHeaders(),
+  //       body: JSON.stringify({ field, value }),
+  //     });
+  //     const result = await res.json().catch(() => ({}));
+  //     if (!res.ok || !result.success) throw new Error(result.message || 'failed');
+  //   } catch (e) {
+  //     setCameras(prev => prev.map(c => c.id === cam.id ? { ...c, [field]: !value } : c));
+  //     addToast('Failed to update camera', 'error');
+  //   }
+  // }, [addToast]);
   const handleToggle = useCallback(async (cam, field, value) => {
-    setCameras(prev => prev.map(c => c.id === cam.id ? { ...c, [field]: value } : c));
+    // optimistic update
+    setCameras(prev =>
+      prev.map(c =>
+        c.id === cam.id ? { ...c, [field]: value } : c
+      )
+    );
+
     try {
-      const res = await fetch(`${API}/cameras/${cam.id}?store=${encodeURIComponent(activeStore)}`, {
+      const res = await fetch(`${API}/cameras/${cam.id}/toggle`, {
         method: 'PUT',
         headers: authHeaders(),
-        body: JSON.stringify({ ...cam, [field]: value, store_name: activeStore }),
+        body: JSON.stringify({ field, value }),
       });
-      if (!res.ok) throw new Error();
-    } catch {
-      setCameras(prev => prev.map(c => c.id === cam.id ? { ...c, [field]: !value } : c));
+
+      const result = await res.json();
+
+      if (!res.ok || !result.success) {
+        throw new Error(result.message || 'Toggle failed');
+      }
+
+      // IMPORTANT
+      // reload actual DB values
+      await loadCameras(activeStore);
+
+    } catch (e) {
+      setCameras(prev =>
+        prev.map(c =>
+          c.id === cam.id ? { ...c, [field]: !value } : c
+        )
+      );
+
       addToast('Failed to update camera', 'error');
+      console.error(e);
     }
-  }, [addToast, activeStore]);
+  }, [addToast, activeStore, loadCameras]);
   const saveCamera = useCallback(async formData => {
     setModalSaving(true);
     try {
