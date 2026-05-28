@@ -2072,7 +2072,7 @@ from transformers import AutoModelForImageClassification, AutoConfig, AutoImageP
 
 transformers.logging.set_verbosity_error()
 
-CONFIG_API_URL = "http://localhost:5000/api/all_stores_config"
+CONFIG_API_URL = "http://217.18.55.78:5000/api/all_stores_config"
 YOLO_INPUT_SIZE = 640
 YOLO_CONF = 0.35
 YOLO_IOU = 0.50
@@ -2120,7 +2120,7 @@ SHARPNESS_THRESHOLD = 3.5
 FACE_SHARPNESS_THRESHOLD = 5.0
 MIN_FACE_SIZE = 40
 MIN_BODY_SIZE = 16
-YOLOV8_FACE_MODEL_PATH = "/home/in_rajshek/AIML/new_gender_model/demo/yolov8n-face.pt"
+YOLOV8_FACE_MODEL_PATH = "/home/rajan/store_pulse/yolov8n-face-lindevs.pt"
 PRESENCE_DEBOUNCE_SEC = float(os.environ.get("PRESENCE_DEBOUNCE_SEC", "1.5"))
 ALERTS_UPDATE_INTERVAL_MIN = float(os.environ.get("ALERTS_UPDATE_INTERVAL_MIN", "1.0"))
 MIN_PRESENCE_TO_RESOLVE_SEC = float(os.environ.get("MIN_PRESENCE_TO_RESOLVE_SEC", "20.0"))
