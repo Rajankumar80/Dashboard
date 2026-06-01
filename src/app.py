@@ -2945,8 +2945,7 @@ def analytics_daily_summary():
              AND DATE(timestamp) BETWEEN ? AND ?""",
         (store_name, str(start_date), str(end_date))
     ).fetchall()
-
-    #    alerts for cashier / security                        
+#    alerts for cashier / security                        
     alert_rows = conn.execute(
         """SELECT a.id, a.camera_id, a.zone_name, a.alert_label, a.triggered_at,
                   a.resolved_at, a.duration_min, a.store_name,
