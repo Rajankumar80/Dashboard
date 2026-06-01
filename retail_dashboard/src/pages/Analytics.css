@@ -589,3 +589,202 @@ button:focus, button:focus-visible { outline: none; }
 .pager-btn{
 visibility: hidden;
 }
+/* ====================== DAILY BREAKDOWN - CONSISTENCY FIX ====================== */
+
+.daily-breakdown-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  margin-top: 8px;
+}
+
+/* Range Toggle Buttons - 7d & 30d */
+.range-toggle-btn {
+  font-family: var(--font-ui);           /* Changed to DM Sans for consistency */
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 52px;
+}
+
+.range-toggle-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  background: var(--surface2);
+  transform: translateY(-1px);
+}
+
+.range-toggle-btn--active {
+  background: var(--teal);
+  color: #001A12;
+  border-color: var(--teal);
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 200, 150, 0.25);
+}
+
+/* Daily Table Improvements */
+.daily-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.daily-table th {
+  font-family: var(--font-ui);           /* Consistent with rest of UI */
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.daily-table td {
+  font-family: var(--font-data);         /* Mono for data/numbers */
+  font-size: 11px;
+  color: var(--text-secondary);
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.daily-cell-date-main {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.daily-cell-date-sub {
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.daily-cell-footfall {
+  font-family: var(--font-data);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.daily-cell-gender-val {
+  font-family: var(--font-data);
+  font-size: 11px;
+}
+
+.daily-cell-peak {
+  font-family: var(--font-data);
+  color: var(--text-secondary);
+}
+
+/* Alert Buttons */
+.daily-alert-btn {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  padding: 2px 5px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 300;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.daily-alert-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.daily-alert-btn--cashier {
+  background: rgba(245, 166, 35, 0.12);
+  color: var(--amber);
+}
+
+.daily-alert-btn--security {
+  background: rgba(124, 106, 247, 0.12);
+  color: var(--violet);
+}
+
+/* Pagination Strip */
+.daily-pager-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.daily-pager-info {
+  font-family: var(--font-data);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.pager-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition: all 0.25s ease;
+  visibility: visible !important;   /* You had hidden it */
+}
+
+.pager-btn:hover {
+  background: var(--teal);
+  color: #001A12;
+  border-color: var(--teal);
+  transform: scale(1.1);
+}
+/* Alert Popup Consistency */
+.alert-popup {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.alert-popup__header {
+  background: rgba(255,255,255,0.03);
+}
+
+.alert-popup__title {
+  font-family: var(--font-ui);
+  font-size: 14.5px;
+}
+
+.popup-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.popup-table th,
+.popup-table td {
+  text-align: left;
+  vertical-align: middle;
+}
+.daily-pager-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pager-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

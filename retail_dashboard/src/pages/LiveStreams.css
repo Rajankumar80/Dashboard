@@ -1,4 +1,4 @@
-.live-streams {
+/* .live-streams {
     padding: 24px;
     height: 100vh;
     background: #0a0f1c;
@@ -177,4 +177,197 @@
     font-weight: 600;
     font-size: 15px;
     color: #cbd5e1;
-  }
+  } */
+  .live-streams {
+  padding: 24px 28px;
+  height: 100vh;
+  background: #0a0f1c;
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ── controls row ───────────────────────────────────────────────────────── */
+.live-controls {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.select-group label {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.select-group select {
+  background: #111827;
+  color: #e2e8f0;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  min-width: 200px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.select-group select:hover,
+.select-group select:focus {
+  border-color: #334155;
+}
+
+/* ── video area ─────────────────────────────────────────────────────────── */
+.video-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.video-wrapper {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  max-height: 100%;
+  position: relative;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 24px 48px rgba(0,0,0,0.6);
+}
+
+.live-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #000;
+}
+
+/* ── overlays ───────────────────────────────────────────────────────────── */
+.loading-overlay,
+.error-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 12, 22, 0.96);
+  z-index: 10;
+  color: #64748b;
+  gap: 8px;
+}
+
+.loading-overlay p,
+.error-overlay p {
+  margin: 0;
+  font-size: 14px;
+  color: #94a3b8;
+  text-align: center;
+  max-width: 340px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.loading-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(255,255,255,0.06);
+  border-top: 3px solid #6366f1;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 8px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-overlay button {
+  margin-top: 12px;
+  padding: 9px 26px;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.error-overlay button:hover  { background: #4f46e5; }
+.error-overlay button:active { transform: scale(0.97); }
+
+/* ── bottom controls bar ────────────────────────────────────────────────── */
+.video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  padding: 32px 18px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.video-wrapper:hover .video-controls {
+  opacity: 1;
+}
+
+.control-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+
+.control-btn:hover  { background: rgba(99,102,241,0.55); border-color: rgba(99,102,241,0.5); }
+.control-btn:active { transform: scale(0.93); }
+
+.stream-info {
+  margin-left: auto;
+}
+
+.camera-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.webrtc-badge {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+} 

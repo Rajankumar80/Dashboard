@@ -21,10 +21,9 @@ body{background:#060b18}
 .settings-store-wrap{position:relative;display:inline-flex;align-items:center;background:#0c1323;border:1px solid #1e2d47;border-radius:9px;height:38px;padding:0 12px;min-width:160px;cursor:pointer}
 .settings-store-wrap:hover{border-color:#3b4f72}
 .settings-store-wrap__icon{color:#818cf8;margin-right:8px}
-.settings-store-select{background:transparent;color:#e0e0e0;border:none;font-size:14px;font-weight:500;outline:none;cursor:pointer;padding-right:24px;min-width:100px}
-.settings-store-arrow{position:absolute;right:12px;color:#64748b;pointer-events:none}
+.settings-store-select{background:transparent;color:#e0e0e0;border:none;font-size:14px;font-weight:500;outline:none;cursor:pointer;padding-right:24px;min-width:100px;appearance: none;-webkit-appearance: none;-moz-appearance: none;}
+.settings-store-arrow{position:absolute;right:12px;top:50%;color:#64748b;transform:translate(-50%);pointer-events:none}
 .settings-store-select option{background:#0a0f1e;color:#e0e0e0}
-
 .settings-tabs{display:flex;gap:6px;background:#0c1323;padding:4px;border-radius:10px}
 .settings-tab{display:flex;align-items:center;gap:7px;padding:8px 18px;background:transparent;border:none;color:#64748b;font-weight:500;font-size:13px;border-radius:8px;cursor:pointer;transition:all .2s}
 .settings-tab svg{flex-shrink:0}
