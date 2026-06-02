@@ -216,3 +216,63 @@ button:focus,button:focus-visible,[role="button"]:focus,[role="button"]:focus-vi
 
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes slideIn{from{transform:translateX(28px);opacity:0}to{transform:translateX(0);opacity:1}}
+.presence-inline{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.presence-label{
+    font-size:13px;
+    font-weight:500;
+    color:#94a3b8;
+    white-space:nowrap;
+}
+
+.presence-small-input{
+    width:75px;
+    height:36px;
+
+    background:#0f172a;
+    border:1px solid #1e2d47;
+    border-radius:9px;
+
+    color:#e2e8f0;
+    text-align:center;
+    font-size:13px;
+    outline:none;
+}
+
+.presence-small-input:focus{
+    border-color:#4f46e5;
+}
+
+.presence-time{
+    height:36px;
+    padding:0 10px;
+
+    background:#0f172a;
+    border:1px solid #1e2d47;
+    border-radius:9px;
+
+    color:#e2e8f0;
+    font-size:13px;
+    outline:none;
+}
+
+.presence-time:focus{
+    border-color:#4f46e5;
+}
+
+.presence-to{
+    font-size:13px;
+    color:#94a3b8;
+}
+
+.presence-divider{
+    width:1px;
+    height:22px;
+    background:#1e2d47;
+    margin:0 4px;
+}

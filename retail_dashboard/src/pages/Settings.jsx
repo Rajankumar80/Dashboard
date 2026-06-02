@@ -304,6 +304,9 @@ function CanvasEditor({ cameras, addToast, activeStore }) {
   const [zoneName, setZoneName] = useState('Clothes');
   const [zoneDetectionMode, setZoneDetectionMode] = useState('visit');
   const [zoneRoleType, setZoneRoleType] = useState('cashier');
+  const [alertAfter, setAlertAfter] = useState('');
+  const [monitorStartTime, setMonitorStartTime] = useState('');
+  const [monitorEndTime, setMonitorEndTime] = useState('');  
   const [pendingLines, setPendingLines] = useState([]);
   const [pendingZonePts, setPendingZonePts] = useState([]);
   const [zoneClosed, setZoneClosed] = useState(false);
@@ -668,6 +671,11 @@ function CanvasEditor({ cameras, addToast, activeStore }) {
     { value: 'cashier', label: 'Cashier' },
     { value: 'security', label: 'Security' },
   ];
+  const durationOptions = [
+  { value: 1, label: '1 Min' },
+  { value: 5, label: '5 Min' },
+  { value: 10, label: '10 Min' }
+];
   return (
     <div className="canvas-editor">
       {confirmDelete && (
@@ -729,12 +737,54 @@ function CanvasEditor({ cameras, addToast, activeStore }) {
               options={detectionOptions}
             />
             {zoneDetectionMode === 'presence' && (
-              <SelectField
-                value={zoneRoleType}
-                onChange={setZoneRoleType}
-                options={roleOptions}
-                className="role-select-animate"
-              />
+              <div className="presence-inline">
+
+                <span className="presence-label">
+                  Alert After
+                </span>
+
+                <input
+                  type="number"
+                  min="1"
+                  max="999"
+                  placeholder="5"
+                  value={alertAfter}
+                  onChange={(e) => setAlertAfter(e.target.value)}
+                  className="presence-small-input"
+                />
+
+                <span className="presence-label">
+                  Min
+                </span>
+
+                <span className="presence-divider" />
+
+                <span className="presence-label">
+                  Monitor
+                </span>
+
+                <input
+                  type="text"
+                  maxLength={5}
+                  placeholder="09:00"
+                  value={monitorStartTime}
+                  onChange={(e) => setMonitorStartTime(e.target.value)}
+                  className="presence-small-input"
+                />
+
+                <span className="presence-to">
+                  to
+                </span>
+
+                <input
+                  type="text"
+                  maxLength={5}
+                  placeholder="22:00"
+                  value={monitorEndTime}
+                  onChange={(e) => setMonitorEndTime(e.target.value)}
+                  className="presence-small-input"
+                />
+              </div>
             )}
             <ToggleChip label="Re-ID" checked={zoneReid} onChange={setZoneReid} colored />
             <ToggleChip label="Gender&Age" checked={zoneGenderAge} onChange={setZoneGenderAge} colored />
