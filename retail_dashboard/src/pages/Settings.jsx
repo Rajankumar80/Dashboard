@@ -596,6 +596,9 @@ function CanvasEditor({ cameras, addToast, activeStore }) {
           gender_age: zoneGenderAge,
           detection_mode: zoneDetectionMode,
           role_type: zoneDetectionMode === 'presence' ? zoneRoleType : null,
+          alert_interval_minutes: alertAfter,
+          monitor_start_time: monitorStartTime,
+          monitor_end_time: monitorEndTime,
           store_name: activeStore,
         }),
       });
